@@ -1,7 +1,7 @@
 # watchtower-api-schema
 
-The Watchtower control-plane OpenAPI 3.1 document (`openapi.json`, copied from the monorepo's
-`apps/web/openapi.json`) plus generated client usage notes ([`CLIENT-NOTES.md`](CLIENT-NOTES.md)).
+The Watchtower control-plane OpenAPI 3.1 document (`openapi.json`, the public cut of the monorepo's
+`apps/web/openapi.json` made by `scripts/public-openapi.py`, without operator-only routes) plus generated client usage notes ([`CLIENT-NOTES.md`](CLIENT-NOTES.md)).
 
 Status: 0.x, early. The schema is generated from server code and may change between minor versions.
 
