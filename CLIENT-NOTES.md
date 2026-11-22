@@ -112,9 +112,12 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/activity/witness`
 - POST `/v1/activity/witness/add-checkpoint`
 
-### auth (2)
+### auth (5)
 
+- POST `/v1/auth/device`
+- POST `/v1/auth/device/token`
 - POST `/v1/auth/exchange`
+- GET `/v1/auth/key`
 - POST `/v1/auth/logout`
 
 ### badges (2)
@@ -138,6 +141,15 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/health/{project}/{env}`
 - GET `/v1/health/{project}/{env}/{service}`
 
+### intake (6)
+
+- POST `/v1/intake/alertmanager`
+- POST `/v1/intake/cloudwatch`
+- POST `/v1/intake/gatus`
+- POST `/v1/intake/generic/{source_id}`
+- POST `/v1/intake/grafana`
+- POST `/v1/intake/{project}/alerts/{source}`
+
 ### integrations (2)
 
 - GET `/v1/integrations/catalog`
@@ -157,30 +169,48 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/mcp/oauth/grants`
 - DELETE `/v1/mcp/oauth/grants/{id}`
 
-### me (12)
+### me (18)
 
 - GET `/v1/me`
+- GET `/v1/me/dashboards`
+- GET `/v1/me/device-logins/{code}`
+- POST `/v1/me/device-logins/{code}/approve`
+- POST `/v1/me/device-logins/{code}/deny`
 - GET `/v1/me/forwarding`
 - PUT `/v1/me/forwarding`
 - GET `/v1/me/mobile-devices`
 - POST `/v1/me/mobile-devices`
 - DELETE `/v1/me/mobile-devices/{device}`
 - POST `/v1/me/mobile-pairings:approve`
+- GET `/v1/me/org-overview`
 - DELETE `/v1/me/push-subscriptions`
+- GET `/v1/me/push-subscriptions`
 - POST `/v1/me/push-subscriptions`
 - GET `/v1/me/tokens`
 - POST `/v1/me/tokens`
 - DELETE `/v1/me/tokens/{id}`
 
-### meta (2)
+### meta (10)
 
 - GET `/.well-known/watchtower-activity/{file}`
+- GET `/healthz/ingest`
+- GET `/healthz/ingest/incidents.atom`
+- GET `/healthz/ingest/incidents.json`
 - POST `/tempopb.StreamingQuerier/{method}`
+- GET `/v1/meta`
+- POST `/v2/alerts`
+- POST `/v2/alerts/{identifier}/acknowledge`
+- POST `/v2/alerts/{identifier}/close`
+- POST `/v2/enqueue`
 
 ### mobile (2)
 
 - POST `/v1/mobile/pairings`
 - POST `/v1/mobile/pairings:token`
+
+### offhost (1)
+
+- POST `/v1/offhost/heartbeat`
 
 ### oncall (3)
 
@@ -188,13 +218,18 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/oncall/settings`
 - PUT `/v1/oncall/settings`
 
-### orgs (153)
+### orgs (184)
 
 - GET `/v1/orgs`
 - POST `/v1/orgs`
 - DELETE `/v1/orgs/{org}`
 - GET `/v1/orgs/{org}`
 - PATCH `/v1/orgs/{org}`
+- GET `/v1/orgs/{org}/access-requests`
+- POST `/v1/orgs/{org}/access-requests`
+- POST `/v1/orgs/{org}/access-requests/{id}/approve`
+- POST `/v1/orgs/{org}/access-requests/{id}/cancel`
+- POST `/v1/orgs/{org}/access-requests/{id}/deny`
 - GET `/v1/orgs/{org}/activity/region`
 - PUT `/v1/orgs/{org}/activity/region`
 - GET `/v1/orgs/{org}/activity/theme`
@@ -208,6 +243,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/orgs/{org}/api-keys`
 - POST `/v1/orgs/{org}/api-keys`
 - DELETE `/v1/orgs/{org}/api-keys/{key}`
+- GET `/v1/orgs/{org}/archive-keys`
+- POST `/v1/orgs/{org}/archive-keys/shred`
 - GET `/v1/orgs/{org}/audit-events`
 - POST `/v1/orgs/{org}/audit/exports`
 - GET `/v1/orgs/{org}/audit/exports/{id}`
@@ -221,6 +258,9 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/orgs/{org}/audit/retention`
 - PUT `/v1/orgs/{org}/audit/retention`
 - GET `/v1/orgs/{org}/audit/verify`
+- GET `/v1/orgs/{org}/billing`
+- POST `/v1/orgs/{org}/billing/checkout`
+- POST `/v1/orgs/{org}/billing/portal`
 - GET `/v1/orgs/{org}/budgets`
 - POST `/v1/orgs/{org}/budgets`
 - DELETE `/v1/orgs/{org}/budgets/{id}`
@@ -241,6 +281,16 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/orgs/{org}/federation/peers`
 - DELETE `/v1/orgs/{org}/federation/peers/{id}`
 - GET `/v1/orgs/{org}/federation/peers/{id}`
+- GET `/v1/orgs/{org}/groups`
+- POST `/v1/orgs/{org}/groups`
+- DELETE `/v1/orgs/{org}/groups/{id}`
+- GET `/v1/orgs/{org}/groups/{id}`
+- DELETE `/v1/orgs/{org}/groups/{id}/orgs/{member}`
+- PUT `/v1/orgs/{org}/groups/{id}/orgs/{member}`
+- PUT `/v1/orgs/{org}/groups/{id}/policy`
+- POST `/v1/orgs/{org}/groups/{id}/push`
+- DELETE `/v1/orgs/{org}/groups/{id}/roles/{role}`
+- PUT `/v1/orgs/{org}/groups/{id}/roles/{role}`
 - GET `/v1/orgs/{org}/idp-connections`
 - POST `/v1/orgs/{org}/idp-connections`
 - DELETE `/v1/orgs/{org}/idp-connections/{id}`
@@ -265,6 +315,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - DELETE `/v1/orgs/{org}/llm/provider-keys/{id}`
 - GET `/v1/orgs/{org}/members`
 - POST `/v1/orgs/{org}/members`
+- DELETE `/v1/orgs/{org}/members/{user}/tokens/{id}`
 - GET `/v1/orgs/{org}/notification-credits`
 - GET `/v1/orgs/{org}/oidc-providers`
 - POST `/v1/orgs/{org}/oidc-providers`
@@ -311,11 +362,19 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/orgs/{org}/service-accounts`
 - POST `/v1/orgs/{org}/service-accounts`
 - DELETE `/v1/orgs/{org}/service-accounts/{id}`
+- GET `/v1/orgs/{org}/service-accounts/{id}`
+- PATCH `/v1/orgs/{org}/service-accounts/{id}`
 - GET `/v1/orgs/{org}/service-accounts/{id}/keys`
 - POST `/v1/orgs/{org}/service-accounts/{id}/keys`
+- DELETE `/v1/orgs/{org}/service-accounts/{id}/keys/{key}`
 - POST `/v1/orgs/{org}/service-accounts/{id}/keys/{key}/rotate`
+- GET `/v1/orgs/{org}/service-accounts/{id}/workload-trusts`
+- POST `/v1/orgs/{org}/service-accounts/{id}/workload-trusts`
+- DELETE `/v1/orgs/{org}/service-accounts/{id}/workload-trusts/{trust}`
 - GET `/v1/orgs/{org}/settings`
 - PATCH `/v1/orgs/{org}/settings`
+- GET `/v1/orgs/{org}/settings/smtp`
+- PUT `/v1/orgs/{org}/settings/smtp`
 - POST `/v1/orgs/{org}/settings/smtp/test`
 - GET `/v1/orgs/{org}/sso`
 - PUT `/v1/orgs/{org}/sso`
@@ -328,6 +387,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/orgs/{org}/team-syncs/{id}/run`
 - GET `/v1/orgs/{org}/teams`
 - POST `/v1/orgs/{org}/teams`
+- PATCH `/v1/orgs/{org}/teams/{id}`
+- GET `/v1/orgs/{org}/teams/{id}/members`
 - PUT `/v1/orgs/{org}/teams/{id}/members`
 - GET `/v1/orgs/{org}/usage`
 - GET `/v1/orgs/{org}/voice/flows`
@@ -348,6 +409,10 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 
 - GET `/v1/plans/calculator`
 
+### platform (1)
+
+- GET `/v1/platform/ingest-status`
+
 ### plugin-sandbox (1)
 
 - GET `/v1/plugin-sandbox`
@@ -357,7 +422,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/print/dashboards/{id}`
 - GET `/v1/print/dashboards/{id}/panels/{panel}`
 
-### projects (1854)
+### projects (2036)
 
 - DELETE `/v1/projects/{prj}`
 - GET `/v1/projects/{prj}`
@@ -542,6 +607,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PUT `/v1/projects/{prj}/agent-configs/{c}`
 - GET `/v1/projects/{prj}/agent-configs/{c}/versions`
 - GET `/v1/projects/{prj}/agents`
+- DELETE `/v1/projects/{prj}/agents/{id}`
 - GET `/v1/projects/{prj}/agents/{id}`
 - PUT `/v1/projects/{prj}/agents/{id}/integrations/{name}`
 - GET `/v1/projects/{prj}/ai/agent-actions`
@@ -605,6 +671,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/alert-sources`
 - POST `/v1/projects/{prj}/alert-sources`
 - DELETE `/v1/projects/{prj}/alert-sources/{id}`
+- GET `/v1/projects/{prj}/alertmanager/api/v2/alerts`
+- POST `/v1/projects/{prj}/alertmanager/api/v2/alerts`
 - DELETE `/v1/projects/{prj}/alertmanager/api/v2/silence/{silence}`
 - GET `/v1/projects/{prj}/alertmanager/api/v2/silence/{silence}`
 - GET `/v1/projects/{prj}/alertmanager/api/v2/silences`
@@ -618,6 +686,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/alerts/noise`
 - POST `/v1/projects/{prj}/alerts/noise/{finding}/apply`
 - POST `/v1/projects/{prj}/alerts/noise/{finding}/dismiss`
+- GET `/v1/projects/{prj}/alerts/storms`
+- GET `/v1/projects/{prj}/alerts/summary`
 - GET `/v1/projects/{prj}/alerts/{alert_action}`
 - POST `/v1/projects/{prj}/alerts/{alert_action}`
 - GET `/v1/projects/{prj}/alerts/{alert_action}/blast-radius`
@@ -666,11 +736,13 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/apm/flows`
 - DELETE `/v1/projects/{prj}/apm/flows/{id}`
 - GET `/v1/projects/{prj}/apm/flows/{id}/health`
+- GET `/v1/projects/{prj}/apm/ingest-stats`
 - GET `/v1/projects/{prj}/apm/map`
 - GET `/v1/projects/{prj}/apm/messaging`
 - GET `/v1/projects/{prj}/apm/netpath`
 - GET `/v1/projects/{prj}/apm/queue-pathways`
 - GET `/v1/projects/{prj}/apm/service-status`
+- GET `/v1/projects/{prj}/apm/services`
 - GET `/v1/projects/{prj}/apm/services/{service}/allocations`
 - GET `/v1/projects/{prj}/apm/services/{service}/apdex`
 - GET `/v1/projects/{prj}/apm/services/{service}/bts`
@@ -682,8 +754,10 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/apm/services/{service}/db/queries/{hash}/explain`
 - POST `/v1/projects/{prj}/apm/services/{service}/db/queries/{hash}/index-pr`
 - GET `/v1/projects/{prj}/apm/services/{service}/db/queries/{hash}/latency`
+- POST `/v1/projects/{prj}/apm/services/{service}/db/queries/{hash}/plan`
 - GET `/v1/projects/{prj}/apm/services/{service}/db/queries/{hash}/plans`
 - POST `/v1/projects/{prj}/apm/services/{service}/db/queries/{hash}/rewrite-check`
+- GET `/v1/projects/{prj}/apm/services/{service}/db/queries/{hash}/traces`
 - GET `/v1/projects/{prj}/apm/services/{service}/db/samples`
 - GET `/v1/projects/{prj}/apm/services/{service}/db/schema`
 - POST `/v1/projects/{prj}/apm/services/{service}/db/snapshot`
@@ -707,6 +781,12 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/app-builds`
 - POST `/v1/projects/{prj}/app-builds`
 - GET `/v1/projects/{prj}/app-builds/{id}/compare`
+- GET `/v1/projects/{prj}/apps`
+- POST `/v1/projects/{prj}/apps`
+- DELETE `/v1/projects/{prj}/apps/{id}`
+- GET `/v1/projects/{prj}/apps/{id}`
+- PUT `/v1/projects/{prj}/apps/{id}`
+- GET `/v1/projects/{prj}/apps/{id}/render`
 - GET `/v1/projects/{prj}/appsec/config`
 - PUT `/v1/projects/{prj}/appsec/config`
 - GET `/v1/projects/{prj}/appsec/denylist`
@@ -720,8 +800,13 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - DELETE `/v1/projects/{prj}/archive/{signal}`
 - GET `/v1/projects/{prj}/archive/{signal}`
 - PUT `/v1/projects/{prj}/archive/{signal}`
+- GET `/v1/projects/{prj}/archive/{signal}/object`
 - GET `/v1/projects/{prj}/artifacts`
 - POST `/v1/projects/{prj}/artifacts`
+- POST `/v1/projects/{prj}/artifacts/bundle`
+- POST `/v1/projects/{prj}/artifacts/complete`
+- POST `/v1/projects/{prj}/artifacts/resolve`
+- POST `/v1/projects/{prj}/artifacts/upload-url`
 - DELETE `/v1/projects/{prj}/artifacts/{art}`
 - GET `/v1/projects/{prj}/artifacts/{art}`
 - GET `/v1/projects/{prj}/attribute-registry`
@@ -731,6 +816,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - DELETE `/v1/projects/{prj}/attribute-registry/{id}`
 - PATCH `/v1/projects/{prj}/attribute-registry/{id}`
 - GET `/v1/projects/{prj}/audit-events`
+- POST `/v1/projects/{prj}/automation-keys`
 - GET `/v1/projects/{prj}/bug-reports`
 - GET `/v1/projects/{prj}/bug-reports/{id}`
 - GET `/v1/projects/{prj}/bug-reports/{id}/screenshot`
@@ -773,17 +859,22 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/catalog/relations`
 - POST `/v1/projects/{prj}/catalog/relations`
 - GET `/v1/projects/{prj}/catalog/services`
+- DELETE `/v1/projects/{prj}/catalog/services/{s}`
 - GET `/v1/projects/{prj}/catalog/services/{s}`
 - PUT `/v1/projects/{prj}/catalog/services/{s}`
+- GET `/v1/projects/{prj}/catalog/services/{s}/actions`
+- PUT `/v1/projects/{prj}/catalog/services/{s}/actions`
 - PUT `/v1/projects/{prj}/catalog/services/{s}/parent`
 - GET `/v1/projects/{prj}/catalog/sync`
 - POST `/v1/projects/{prj}/catalog/sync`
 - DELETE `/v1/projects/{prj}/catalog/sync/{id}`
 - POST `/v1/projects/{prj}/catalog/sync/{id}/run`
+- POST `/v1/projects/{prj}/catalog/teams`
 - GET `/v1/projects/{prj}/catalog/tree`
 - GET `/v1/projects/{prj}/change-sources`
 - POST `/v1/projects/{prj}/change-sources`
 - DELETE `/v1/projects/{prj}/change-sources/{id}`
+- PATCH `/v1/projects/{prj}/change-sources/{id}`
 - GET `/v1/projects/{prj}/check-coverage`
 - POST `/v1/projects/{prj}/check-coverage/crawl`
 - GET `/v1/projects/{prj}/check-results`
@@ -798,6 +889,11 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/ci-sources`
 - POST `/v1/projects/{prj}/ci-sources`
 - DELETE `/v1/projects/{prj}/ci-sources/{id}`
+- GET `/v1/projects/{prj}/ci/gates`
+- POST `/v1/projects/{prj}/ci/gates`
+- DELETE `/v1/projects/{prj}/ci/gates/{id}`
+- POST `/v1/projects/{prj}/ci/gates/{id}/evaluate`
+- GET `/v1/projects/{prj}/ci/jobs/flaky`
 - GET `/v1/projects/{prj}/ci/pipelines`
 - GET `/v1/projects/{prj}/ci/runs/{id}`
 - GET `/v1/projects/{prj}/cloud-pulls`
@@ -806,6 +902,10 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PATCH `/v1/projects/{prj}/cloud-pulls/{id}`
 - POST `/v1/projects/{prj}/cloud-pulls/{id}/query`
 - GET `/v1/projects/{prj}/code-links`
+- POST `/v1/projects/{prj}/code-security/dependencies`
+- POST `/v1/projects/{prj}/code-security/images`
+- POST `/v1/projects/{prj}/code-security/runtime`
+- POST `/v1/projects/{prj}/code-security/sarif`
 - GET `/v1/projects/{prj}/code-stats`
 - GET `/v1/projects/{prj}/collections`
 - POST `/v1/projects/{prj}/collections`
@@ -822,8 +922,15 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/compare/metrics-correlated`
 - POST `/v1/projects/{prj}/compare/spotlight`
 - GET `/v1/projects/{prj}/correlate`
+- GET `/v1/projects/{prj}/correlation-cases`
 - GET `/v1/projects/{prj}/correlation-links`
 - PUT `/v1/projects/{prj}/correlation-links`
+- GET `/v1/projects/{prj}/correlation-rules`
+- POST `/v1/projects/{prj}/correlation-rules`
+- DELETE `/v1/projects/{prj}/correlation-rules/{id}`
+- GET `/v1/projects/{prj}/correlation-rules/{id}`
+- PATCH `/v1/projects/{prj}/correlation-rules/{id}`
+- GET `/v1/projects/{prj}/correlation-rules/{id}/stats`
 - GET `/v1/projects/{prj}/cost`
 - GET `/v1/projects/{prj}/cost-sources`
 - POST `/v1/projects/{prj}/cost-sources`
@@ -842,6 +949,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/credentials`
 - POST `/v1/projects/{prj}/credentials`
 - GET `/v1/projects/{prj}/credentials/hygiene`
+- GET `/v1/projects/{prj}/credentials/old-host-usage`
 - DELETE `/v1/projects/{prj}/credentials/{cred}`
 - GET `/v1/projects/{prj}/credentials/{cred}`
 - PATCH `/v1/projects/{prj}/credentials/{cred}`
@@ -879,6 +987,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/dashboards/generate`
 - POST `/v1/projects/{prj}/dashboards/import`
 - POST `/v1/projects/{prj}/dashboards/imports`
+- GET `/v1/projects/{prj}/dashboards/spec-schema`
 - GET `/v1/projects/{prj}/dashboards/suggestions`
 - DELETE `/v1/projects/{prj}/dashboards/{dash}`
 - GET `/v1/projects/{prj}/dashboards/{dash}`
@@ -907,6 +1016,13 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/dashboards/{dash}/versions/{n}`
 - POST `/v1/projects/{prj}/dashboards/{dash}/versions/{n}/restore`
 - POST `/v1/projects/{prj}/dashboards/{dash}/views`
+- GET `/v1/projects/{prj}/data-jobs`
+- GET `/v1/projects/{prj}/data-monitors`
+- POST `/v1/projects/{prj}/data-monitors`
+- DELETE `/v1/projects/{prj}/data-monitors/{id}`
+- GET `/v1/projects/{prj}/data-monitors/{id}`
+- PATCH `/v1/projects/{prj}/data-monitors/{id}`
+- PUT `/v1/projects/{prj}/data-monitors/{id}`
 - GET `/v1/projects/{prj}/datasets/{id}/field-mappings`
 - PUT `/v1/projects/{prj}/datasets/{id}/field-mappings`
 - POST `/v1/projects/{prj}/datasources/{plugin}/query`
@@ -934,10 +1050,20 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/deleted-alert-rules/{rule_action}`
 - GET `/v1/projects/{prj}/deletions`
 - POST `/v1/projects/{prj}/deletions`
+- GET `/v1/projects/{prj}/deletions/approval`
+- PUT `/v1/projects/{prj}/deletions/approval`
 - GET `/v1/projects/{prj}/deletions/{id}`
 - POST `/v1/projects/{prj}/deletions/{id}/approve`
 - POST `/v1/projects/{prj}/deletions/{id}/cancel`
+- GET `/v1/projects/{prj}/deletions/{id}/certificate`
+- GET `/v1/projects/{prj}/deployments`
 - POST `/v1/projects/{prj}/deployments`
+- PATCH `/v1/projects/{prj}/deployments/{id}`
+- GET `/v1/projects/{prj}/deployments/{id}/audit`
+- GET `/v1/projects/{prj}/deployments/{id}/health`
+- GET `/v1/projects/{prj}/deployments/{id}/impact`
+- GET `/v1/projects/{prj}/deployments/{id}/previous`
+- GET `/v1/projects/{prj}/deployments/{id}/score`
 - GET `/v1/projects/{prj}/dora`
 - GET `/v1/projects/{prj}/dora/backfills`
 - POST `/v1/projects/{prj}/dora/backfills`
@@ -968,6 +1094,10 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/event-subscriptions/{sub}/deliveries`
 - POST `/v1/projects/{prj}/event-subscriptions/{sub}/deliveries/{delivery}/redeliver`
 - POST `/v1/projects/{prj}/event-subscriptions/{sub}/test`
+- GET `/v1/projects/{prj}/events`
+- POST `/v1/projects/{prj}/events`
+- POST `/v1/projects/{prj}/events/lookup`
+- GET `/v1/projects/{prj}/events/{event_id}`
 - GET `/v1/projects/{prj}/export-destinations`
 - POST `/v1/projects/{prj}/export-destinations`
 - DELETE `/v1/projects/{prj}/export-destinations/{id}`
@@ -985,15 +1115,19 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/federation/sources/{id}`
 - GET `/v1/projects/{prj}/feedback`
 - GET `/v1/projects/{prj}/flags/{key}/context`
+- GET `/v1/projects/{prj}/flags/{key}/impact`
 - GET `/v1/projects/{prj}/fleet/agents`
+- DELETE `/v1/projects/{prj}/fleet/agents/{id}`
 - GET `/v1/projects/{prj}/fleet/agents/{id}`
 - POST `/v1/projects/{prj}/fleet/agents/{id}/flare`
 - GET `/v1/projects/{prj}/fleet/agents/{id}/flares`
+- GET `/v1/projects/{prj}/fleet/agents/{id}/flares/{flare}`
 - POST `/v1/projects/{prj}/fleet/agents/{id}/restart`
 - POST `/v1/projects/{prj}/fleet/agents/{id}/tap`
 - GET `/v1/projects/{prj}/fleet/agents/{id}/taps`
 - GET `/v1/projects/{prj}/fleet/configs`
 - POST `/v1/projects/{prj}/fleet/configs`
+- DELETE `/v1/projects/{prj}/fleet/configs/{id}`
 - GET `/v1/projects/{prj}/fleet/configs/{id}`
 - GET `/v1/projects/{prj}/fleet/configs/{id}/versions`
 - POST `/v1/projects/{prj}/fleet/configs/{id}/versions`
@@ -1074,6 +1208,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/incidents/{inc}/actions`
 - POST `/v1/projects/{prj}/incidents/{inc}/actions/{act}/run`
 - GET `/v1/projects/{prj}/incidents/{inc}/chat-links`
+- POST `/v1/projects/{prj}/incidents/{inc}/chat-links`
+- DELETE `/v1/projects/{prj}/incidents/{inc}/chat-links/{provider}`
 - GET `/v1/projects/{prj}/incidents/{inc}/cost`
 - GET `/v1/projects/{prj}/incidents/{inc}/decisions`
 - POST `/v1/projects/{prj}/incidents/{inc}/decisions`
@@ -1137,10 +1273,13 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/infra/ops/proposals/{id}/decision`
 - POST `/v1/projects/{prj}/infra/ops/signals`
 - GET `/v1/projects/{prj}/infra/topology`
+- GET `/v1/projects/{prj}/ingest-incidents`
+- GET `/v1/projects/{prj}/ingest/data-receipt`
 - GET `/v1/projects/{prj}/ingest/dead-letters`
 - POST `/v1/projects/{prj}/ingest/dead-letters/replay`
 - GET `/v1/projects/{prj}/ingest/debug`
 - GET `/v1/projects/{prj}/ingest/fixes`
+- GET `/v1/projects/{prj}/ingest/gaps`
 - GET `/v1/projects/{prj}/ingest/ip-blocklist`
 - PUT `/v1/projects/{prj}/ingest/ip-blocklist`
 - GET `/v1/projects/{prj}/ingest/limits`
@@ -1157,6 +1296,11 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/insights/{id}/close`
 - GET `/v1/projects/{prj}/instrumentation/coverage`
 - GET `/v1/projects/{prj}/instrumentation/lint`
+- GET `/v1/projects/{prj}/instrumentation/sdk-upgrade-jobs`
+- POST `/v1/projects/{prj}/instrumentation/sdk-upgrade-jobs`
+- GET `/v1/projects/{prj}/instrumentation/sdk-upgrade-jobs/{id}`
+- POST `/v1/projects/{prj}/instrumentation/sdk-upgrade-jobs/{id}/rollback`
+- GET `/v1/projects/{prj}/instrumentation/sdk-upgrades`
 - GET `/v1/projects/{prj}/integration-health`
 - GET `/v1/projects/{prj}/integrations`
 - GET `/v1/projects/{prj}/integrations/detected`
@@ -1238,6 +1382,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PUT `/v1/projects/{prj}/library-panels/{id}`
 - GET `/v1/projects/{prj}/library-panels/{id}/connections`
 - GET `/v1/projects/{prj}/library-panels/{id}/versions`
+- GET `/v1/projects/{prj}/lineage`
+- POST `/v1/projects/{prj}/lineage`
 - GET `/v1/projects/{prj}/link-rules`
 - POST `/v1/projects/{prj}/link-rules`
 - DELETE `/v1/projects/{prj}/link-rules/{id}`
@@ -1302,6 +1448,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/llm/judge-templates`
 - POST `/v1/projects/{prj}/llm/judges/generate`
 - GET `/v1/projects/{prj}/llm/links`
+- GET `/v1/projects/{prj}/llm/managed-evaluators`
+- POST `/v1/projects/{prj}/llm/managed-evaluators/install`
 - GET `/v1/projects/{prj}/llm/mcp/health`
 - GET `/v1/projects/{prj}/llm/media/{sha256}`
 - GET `/v1/projects/{prj}/llm/metrics`
@@ -1369,6 +1517,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/llm/topic-labels`
 - GET `/v1/projects/{prj}/llm/topics`
 - PUT `/v1/projects/{prj}/llm/topics/{topic}/label`
+- GET `/v1/projects/{prj}/llm/traces/{trace_id}/cost`
 - GET `/v1/projects/{prj}/llm/users`
 - GET `/v1/projects/{prj}/load-targets`
 - POST `/v1/projects/{prj}/load-targets`
@@ -1399,6 +1548,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/logs-traces/settings`
 - PUT `/v1/projects/{prj}/logs-traces/settings`
 - GET `/v1/projects/{prj}/logs/aggregate`
+- POST `/v1/projects/{prj}/logs/aggregate`
 - GET `/v1/projects/{prj}/logs/context`
 - POST `/v1/projects/{prj}/logs/context`
 - POST `/v1/projects/{prj}/logs/export`
@@ -1406,14 +1556,18 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/logs/exports`
 - GET `/v1/projects/{prj}/logs/exports/{id}`
 - POST `/v1/projects/{prj}/logs/fields`
+- GET `/v1/projects/{prj}/logs/histogram`
 - POST `/v1/projects/{prj}/logs/histogram`
 - POST `/v1/projects/{prj}/logs/integrity/verify`
 - POST `/v1/projects/{prj}/logs/patterns`
 - POST `/v1/projects/{prj}/logs/patterns/action`
 - GET `/v1/projects/{prj}/logs/search`
 - POST `/v1/projects/{prj}/logs/search`
+- POST `/v1/projects/{prj}/logs/sessions`
+- DELETE `/v1/projects/{prj}/logs/sessions/{id}`
 - POST `/v1/projects/{prj}/logs/stream`
 - GET `/v1/projects/{prj}/logs/tail`
+- GET `/v1/projects/{prj}/logs/{id}`
 - DELETE `/v1/projects/{prj}/loki/api/v1/delete`
 - GET `/v1/projects/{prj}/loki/api/v1/delete`
 - POST `/v1/projects/{prj}/loki/api/v1/delete`
@@ -1503,6 +1657,9 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/metrics/labels`
 - GET `/v1/projects/{prj}/metrics/labels/{name}/values`
 - GET `/v1/projects/{prj}/metrics/limits`
+- GET `/v1/projects/{prj}/metrics/metadata`
+- DELETE `/v1/projects/{prj}/metrics/metadata/{metric}`
+- PUT `/v1/projects/{prj}/metrics/metadata/{metric}`
 - GET `/v1/projects/{prj}/metrics/names`
 - GET `/v1/projects/{prj}/metrics/query_range`
 - GET `/v1/projects/{prj}/metrics/search`
@@ -1528,6 +1685,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/monitors/playwright-bundles`
 - DELETE `/v1/projects/{prj}/monitors/{monitor}`
 - GET `/v1/projects/{prj}/monitors/{monitor}`
+- PATCH `/v1/projects/{prj}/monitors/{monitor}`
 - POST `/v1/projects/{prj}/monitors/{monitor}`
 - PUT `/v1/projects/{prj}/monitors/{monitor}`
 - DELETE `/v1/projects/{prj}/monitors/{monitor}/badge`
@@ -1565,6 +1723,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PUT `/v1/projects/{prj}/netconf-devices/{id}/startup-config`
 - GET `/v1/projects/{prj}/netconf-devices/{id}/startup-diff`
 - GET `/v1/projects/{prj}/notebooks`
+- POST `/v1/projects/{prj}/notebooks`
 - POST `/v1/projects/{prj}/notebooks/from-investigation/{id}`
 - POST `/v1/projects/{prj}/notebooks/{dash}/cells`
 - GET `/v1/projects/{prj}/notebooks/{dash}/comments`
@@ -1579,6 +1738,10 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/oncall/feeds`
 - DELETE `/v1/projects/{prj}/oncall/feeds/{feed_action}`
 - POST `/v1/projects/{prj}/oncall/feeds/{feed_action}`
+- DELETE `/v1/projects/{prj}/oncall/hris`
+- GET `/v1/projects/{prj}/oncall/hris`
+- PUT `/v1/projects/{prj}/oncall/hris`
+- POST `/v1/projects/{prj}/oncall/hris/sync`
 - GET `/v1/projects/{prj}/oncall/now`
 - GET `/v1/projects/{prj}/oncall/readiness`
 - GET `/v1/projects/{prj}/oncall/reports`
@@ -1628,6 +1791,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/pipelines`
 - GET `/v1/projects/{prj}/pipelines/health`
 - GET `/v1/projects/{prj}/pipelines/packs`
+- GET `/v1/projects/{prj}/pipelines/presets`
 - GET `/v1/projects/{prj}/pipelines/presets/spanmetrics`
 - GET `/v1/projects/{prj}/pipelines/processors`
 - POST `/v1/projects/{prj}/pipelines/simulate`
@@ -1669,6 +1833,11 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PUT `/v1/projects/{prj}/preview-settings`
 - GET `/v1/projects/{prj}/privacy`
 - PUT `/v1/projects/{prj}/privacy`
+- POST `/v1/projects/{prj}/privacy/lookup`
+- POST `/v1/projects/{prj}/privacy/requests`
+- GET `/v1/projects/{prj}/privacy/requests/{id}`
+- POST `/v1/projects/{prj}/privacy/requests/{id}/cancel`
+- POST `/v1/projects/{prj}/privacy/requests/{id}/run`
 - GET `/v1/projects/{prj}/probe-locations`
 - POST `/v1/projects/{prj}/probe-locations`
 - DELETE `/v1/projects/{prj}/probe-locations/{id}`
@@ -1778,6 +1947,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/quality-gates`
 - POST `/v1/projects/{prj}/quality-gates`
 - DELETE `/v1/projects/{prj}/quality-gates/{id}`
+- PATCH `/v1/projects/{prj}/quality-gates/{id}`
 - POST `/v1/projects/{prj}/querier.v1.QuerierService/AnalyzeQuery`
 - POST `/v1/projects/{prj}/querier.v1.QuerierService/Diff`
 - POST `/v1/projects/{prj}/querier.v1.QuerierService/GetProfileStats`
@@ -1821,6 +1991,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/receivers/{receiver}`
 - POST `/v1/projects/{prj}/receivers/{receiver}`
 - PUT `/v1/projects/{prj}/receivers/{receiver}`
+- GET `/v1/projects/{prj}/recording-rules`
+- GET `/v1/projects/{prj}/recording-rules/{group}/{name}`
 - GET `/v1/projects/{prj}/redaction-jobs`
 - POST `/v1/projects/{prj}/redaction-jobs`
 - POST `/v1/projects/{prj}/redaction-jobs/preview`
@@ -1843,15 +2015,21 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/release-health`
 - GET `/v1/projects/{prj}/releases`
 - POST `/v1/projects/{prj}/releases`
+- DELETE `/v1/projects/{prj}/releases/{version}`
+- GET `/v1/projects/{prj}/releases/{version}`
+- POST `/v1/projects/{prj}/releases/{version}/artifacts:batch`
 - POST `/v1/projects/{prj}/releases/{version}/audit`
 - GET `/v1/projects/{prj}/releases/{version}/gates`
 - GET `/v1/projects/{prj}/releases/{version}/health`
 - GET `/v1/projects/{prj}/releases/{version}/impact`
 - GET `/v1/projects/{prj}/releases/{version}/previous`
 - GET `/v1/projects/{prj}/releases/{version}/score`
+- GET `/v1/projects/{prj}/releases/{version}/sourcemap-coverage`
 - GET `/v1/projects/{prj}/remediation-actions`
 - POST `/v1/projects/{prj}/remediation-actions`
 - POST `/v1/projects/{prj}/remediation-actions/{id}/runs`
+- GET `/v1/projects/{prj}/replay-assist/control-settings`
+- PUT `/v1/projects/{prj}/replay-assist/control-settings`
 - GET `/v1/projects/{prj}/replay-assist/settings`
 - PUT `/v1/projects/{prj}/replay-assist/settings`
 - GET `/v1/projects/{prj}/replay-collections`
@@ -1873,6 +2051,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/replays/{session}/assist`
 - POST `/v1/projects/{prj}/replays/{session}/assist`
 - POST `/v1/projects/{prj}/replays/{session}/assist/commands`
+- DELETE `/v1/projects/{prj}/replays/{session}/assist/control`
 - POST `/v1/projects/{prj}/replays/{session}/assist/control`
 - POST `/v1/projects/{prj}/replays/{session}/assist/end`
 - GET `/v1/projects/{prj}/replays/{session}/chunks`
@@ -1911,6 +2090,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PUT `/v1/projects/{prj}/retention/caps/{signal}`
 - GET `/v1/projects/{prj}/retention/preview`
 - GET `/v1/projects/{prj}/routing`
+- PATCH `/v1/projects/{prj}/routing`
 - PUT `/v1/projects/{prj}/routing`
 - GET `/v1/projects/{prj}/routing-schedules`
 - DELETE `/v1/projects/{prj}/routing-schedules/{name}`
@@ -1940,8 +2120,13 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/rum/keys`
 - DELETE `/v1/projects/{prj}/rum/keys/{key}`
 - PATCH `/v1/projects/{prj}/rum/keys/{key}`
+- GET `/v1/projects/{prj}/rum/launch-profile`
 - GET `/v1/projects/{prj}/rum/launches`
 - GET `/v1/projects/{prj}/rum/live`
+- GET `/v1/projects/{prj}/rum/long-tasks`
+- DELETE `/v1/projects/{prj}/rum/lucida`
+- GET `/v1/projects/{prj}/rum/lucida`
+- PUT `/v1/projects/{prj}/rum/lucida`
 - GET `/v1/projects/{prj}/rum/pages`
 - GET `/v1/projects/{prj}/rum/pipeline`
 - PUT `/v1/projects/{prj}/rum/pipeline`
@@ -1952,15 +2137,22 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - DELETE `/v1/projects/{prj}/rum/posthog/key`
 - PUT `/v1/projects/{prj}/rum/posthog/key`
 - GET `/v1/projects/{prj}/rum/posthog/person`
+- GET `/v1/projects/{prj}/rum/release-coverage`
 - GET `/v1/projects/{prj}/rum/resources`
 - GET `/v1/projects/{prj}/rum/retention-filters`
 - PUT `/v1/projects/{prj}/rum/retention-filters`
 - GET `/v1/projects/{prj}/rum/sessions`
 - GET `/v1/projects/{prj}/rum/sessions/affected`
+- DELETE `/v1/projects/{prj}/rum/sessions/{id}`
 - GET `/v1/projects/{prj}/rum/sessions/{id}`
 - GET `/v1/projects/{prj}/rum/sessions/{id}/compare/{other}`
 - GET `/v1/projects/{prj}/rum/traces/{trace_id}`
 - GET `/v1/projects/{prj}/rum/vitals`
+- DELETE `/v1/projects/{prj}/rum/vitals-exports`
+- GET `/v1/projects/{prj}/rum/vitals-exports`
+- PUT `/v1/projects/{prj}/rum/vitals-exports`
+- GET `/v1/projects/{prj}/rum/vitals/by_screen`
+- GET `/v1/projects/{prj}/rum/vitals/pageviews`
 - GET `/v1/projects/{prj}/runbook-runs`
 - GET `/v1/projects/{prj}/runbook-runs/{id}`
 - POST `/v1/projects/{prj}/runbook-runs/{id}/close`
@@ -1997,34 +2189,62 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/scopes`
 - PUT `/v1/projects/{prj}/scopes`
 - GET `/v1/projects/{prj}/scorecards`
+- GET `/v1/projects/{prj}/scorecards/history`
+- POST `/v1/projects/{prj}/scorecards/outcomes`
 - GET `/v1/projects/{prj}/scorecards/rules`
 - POST `/v1/projects/{prj}/scorecards/rules`
 - GET `/v1/projects/{prj}/scorecards/rules/results`
 - DELETE `/v1/projects/{prj}/scorecards/rules/{id}`
+- PATCH `/v1/projects/{prj}/scorecards/rules/{id}`
 - GET `/v1/projects/{prj}/search`
 - GET `/v1/projects/{prj}/security-sources`
 - POST `/v1/projects/{prj}/security-sources`
 - DELETE `/v1/projects/{prj}/security-sources/{id}`
+- GET `/v1/projects/{prj}/security/findings`
+- POST `/v1/projects/{prj}/security/findings/propose-fix`
+- GET `/v1/projects/{prj}/security/identity-risks`
+- GET `/v1/projects/{prj}/security/rule-packs`
+- POST `/v1/projects/{prj}/security/rule-packs/install`
+- GET `/v1/projects/{prj}/security/rules`
+- POST `/v1/projects/{prj}/security/rules`
+- POST `/v1/projects/{prj}/security/rules/test`
+- DELETE `/v1/projects/{prj}/security/rules/{id}`
+- GET `/v1/projects/{prj}/security/rules/{id}`
+- PATCH `/v1/projects/{prj}/security/rules/{id}`
+- POST `/v1/projects/{prj}/security/rules/{id}/backtest`
+- GET `/v1/projects/{prj}/security/signals`
+- GET `/v1/projects/{prj}/security/signals/{id}`
+- PATCH `/v1/projects/{prj}/security/signals/{id}`
+- GET `/v1/projects/{prj}/security/signals/{id}/triage`
+- POST `/v1/projects/{prj}/security/signals/{id}/triage`
 - DELETE `/v1/projects/{prj}/sentry/api/0/issues/{id}/`
 - GET `/v1/projects/{prj}/sentry/api/0/issues/{id}/`
 - PUT `/v1/projects/{prj}/sentry/api/0/issues/{id}/`
 - GET `/v1/projects/{prj}/sentry/api/0/issues/{id}/events/`
 - GET `/v1/projects/{prj}/sentry/api/0/issues/{id}/events/latest/`
+- GET `/v1/projects/{prj}/sentry/api/0/issues/{id}/tags/{key}/`
 - POST `/v1/projects/{prj}/sentry/api/0/organizations/{org}/artifactbundle/assemble/`
 - GET `/v1/projects/{prj}/sentry/api/0/organizations/{org}/chunk-upload/`
 - POST `/v1/projects/{prj}/sentry/api/0/organizations/{org}/chunk-upload/`
+- GET `/v1/projects/{prj}/sentry/api/0/organizations/{org}/issues/`
+- GET `/v1/projects/{prj}/sentry/api/0/organizations/{org}/projects/`
 - POST `/v1/projects/{prj}/sentry/api/0/organizations/{org}/releases/`
 - GET `/v1/projects/{prj}/sentry/api/0/organizations/{org}/releases/{version}/`
 - PUT `/v1/projects/{prj}/sentry/api/0/organizations/{org}/releases/{version}/`
 - POST `/v1/projects/{prj}/sentry/api/0/organizations/{org}/releases/{version}/deploys/`
 - GET `/v1/projects/{prj}/sentry/api/0/organizations/{org}/repos/`
+- GET `/v1/projects/{prj}/sentry/api/0/projects/`
+- GET `/v1/projects/{prj}/sentry/api/0/projects/{org}/{project}/`
 - GET `/v1/projects/{prj}/sentry/api/0/projects/{org}/{project}/events/`
 - GET `/v1/projects/{prj}/sentry/api/0/projects/{org}/{project}/events/{event_id}/`
 - POST `/v1/projects/{prj}/sentry/api/0/projects/{org}/{project}/files/difs/assemble/`
 - GET `/v1/projects/{prj}/sentry/api/0/projects/{org}/{project}/issues/`
+- PUT `/v1/projects/{prj}/sentry/api/0/projects/{org}/{project}/issues/`
 - GET `/v1/projects/{prj}/sentry/api/0/projects/{org}/{project}/releases/`
 - GET `/v1/projects/{prj}/sentry/trace-sampling`
 - PUT `/v1/projects/{prj}/sentry/trace-sampling`
+- GET `/v1/projects/{prj}/serverless/functions`
+- GET `/v1/projects/{prj}/serverless/functions/{name}`
 - PATCH `/v1/projects/{prj}/service-accounts/{id}/allowed-cidrs`
 - GET `/v1/projects/{prj}/service-remaps`
 - PUT `/v1/projects/{prj}/service-remaps`
@@ -2039,7 +2259,10 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PUT `/v1/projects/{prj}/services/{svc}/api-spec`
 - GET `/v1/projects/{prj}/settings/contracts`
 - PUT `/v1/projects/{prj}/settings/contracts`
+- GET `/v1/projects/{prj}/settings/product-analytics`
+- PUT `/v1/projects/{prj}/settings/product-analytics`
 - GET `/v1/projects/{prj}/settings/quotas`
+- PUT `/v1/projects/{prj}/settings/quotas`
 - PUT `/v1/projects/{prj}/settings/quotas/series`
 - GET `/v1/projects/{prj}/settings/retention`
 - PATCH `/v1/projects/{prj}/settings/retention`
@@ -2049,12 +2272,17 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PUT `/v1/projects/{prj}/settings/sampling`
 - GET `/v1/projects/{prj}/settings/shaping`
 - PUT `/v1/projects/{prj}/settings/shaping`
+- GET `/v1/projects/{prj}/shadow/datadog`
+- POST `/v1/projects/{prj}/shadow/datadog`
 - GET `/v1/projects/{prj}/shaping-rules`
 - POST `/v1/projects/{prj}/shaping-rules`
 - DELETE `/v1/projects/{prj}/shaping-rules/{id}`
+- GET `/v1/projects/{prj}/shaping-rules/{id}`
 - PATCH `/v1/projects/{prj}/shaping-rules/{id}`
 - GET `/v1/projects/{prj}/shaping-rules/{id}/failures`
+- GET `/v1/projects/{prj}/shaping-rules/{id}/impact`
 - POST `/v1/projects/{prj}/shaping-rules/{id}/impact`
+- POST `/v1/projects/{prj}/shaping-rules:test`
 - GET `/v1/projects/{prj}/shaping-suggestions`
 - POST `/v1/projects/{prj}/shaping-suggestions/{id}/accept`
 - POST `/v1/projects/{prj}/shaping-suggestions/{id}/dismiss`
@@ -2073,6 +2301,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/sla-policies/{id}`
 - PUT `/v1/projects/{prj}/sla-policies/{id}`
 - GET `/v1/projects/{prj}/sla-policies/{id}/availability`
+- GET `/v1/projects/{prj}/sla-policies/{id}/report`
 - GET `/v1/projects/{prj}/sla-policies/{id}/services-tree`
 - PUT `/v1/projects/{prj}/sla/services-tree`
 - GET `/v1/projects/{prj}/slos`
@@ -2091,11 +2320,19 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - POST `/v1/projects/{prj}/slos/{slo}/corrections`
 - DELETE `/v1/projects/{prj}/slos/{slo}/corrections/{correction}`
 - GET `/v1/projects/{prj}/slos/{slo}/history`
+- GET `/v1/projects/{prj}/software-templates`
+- POST `/v1/projects/{prj}/software-templates`
+- DELETE `/v1/projects/{prj}/software-templates/{id}`
+- POST `/v1/projects/{prj}/software-templates/{id}/instantiate`
 - GET `/v1/projects/{prj}/source/blame`
 - GET `/v1/projects/{prj}/source/snippet`
 - GET `/v1/projects/{prj}/sourcemap-fetch`
 - PUT `/v1/projects/{prj}/sourcemap-fetch`
 - GET `/v1/projects/{prj}/sources`
+- GET `/v1/projects/{prj}/span-metrics`
+- POST `/v1/projects/{prj}/span-metrics`
+- GET `/v1/projects/{prj}/span-metrics/stages`
+- DELETE `/v1/projects/{prj}/span-metrics/{id}`
 - GET `/v1/projects/{prj}/sql-sources`
 - POST `/v1/projects/{prj}/sql-sources`
 - DELETE `/v1/projects/{prj}/sql-sources/{id}`
@@ -2105,10 +2342,16 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/sql-sources/{id}/usage`
 - GET `/v1/projects/{prj}/sql/tables`
 - GET `/v1/projects/{prj}/stale-resources`
+- GET `/v1/projects/{prj}/storage-sources`
+- POST `/v1/projects/{prj}/storage-sources`
+- DELETE `/v1/projects/{prj}/storage-sources/{id}`
+- GET `/v1/projects/{prj}/storage/prefixes`
 - GET `/v1/projects/{prj}/support-bundle`
 - GET `/v1/projects/{prj}/symbol-sources`
 - POST `/v1/projects/{prj}/symbol-sources`
+- GET `/v1/projects/{prj}/symbol-sources/presets`
 - DELETE `/v1/projects/{prj}/symbol-sources/{id}`
+- PATCH `/v1/projects/{prj}/symbol-sources/{id}`
 - PUT `/v1/projects/{prj}/team-grants/{team}`
 - GET `/v1/projects/{prj}/templates`
 - POST `/v1/projects/{prj}/templates`
@@ -2140,6 +2383,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/tests/flaky-policy`
 - PUT `/v1/projects/{prj}/tests/flaky-policy`
 - POST `/v1/projects/{prj}/tests/plan`
+- POST `/v1/projects/{prj}/tests/skippable`
 - GET `/v1/projects/{prj}/tests/slowest`
 - GET `/v1/projects/{prj}/tests/{id}/history`
 - POST `/v1/projects/{prj}/tests/{id}/quarantine`
@@ -2197,6 +2441,7 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - GET `/v1/projects/{prj}/usage/advisor`
 - POST `/v1/projects/{prj}/usage/advisor/{id}/preview`
 - GET `/v1/projects/{prj}/usage/attributes`
+- GET `/v1/projects/{prj}/usage/by-service`
 - GET `/v1/projects/{prj}/usage/by-source`
 - GET `/v1/projects/{prj}/usage/forecast`
 - GET `/v1/projects/{prj}/usage/invoice-preview`
@@ -2204,6 +2449,8 @@ Generated from `openapi.json` by `scripts/check.py --notes`; do not edit.
 - PUT `/v1/projects/{prj}/usage/invoice-rates`
 - GET `/v1/projects/{prj}/usage/metrics`
 - POST `/v1/projects/{prj}/validate/{kind}`
+- GET `/v1/projects/{prj}/vulnerabilities`
+- PATCH `/v1/projects/{prj}/vulnerabilities/{id}`
 - GET `/v1/projects/{prj}/workflows`
 - POST `/v1/projects/{prj}/workflows`
 - POST `/v1/projects/{prj}/workflows/from-template/{id}`
